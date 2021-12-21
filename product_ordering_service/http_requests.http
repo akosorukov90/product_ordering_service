@@ -1,0 +1,123 @@
+#Магазины
+###
+GET http://127.0.0.1:8000/api/v1/shop/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+###
+POST http://127.0.0.1:8000/api/v1/shop/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+{
+  "name": "Связной",
+  "url": ""
+}
+
+
+#Категории
+###
+GET http://127.0.0.1:8000/api/v1/category/
+Content-Type: application/json
+
+#Продукты
+###
+GET http://127.0.0.1:8000/api/v1/product/
+Content-Type: application/json
+
+#Информация о продуктах
+###
+GET http://127.0.0.1:8000/api/v1/product_info/
+Content-Type: application/json
+
+#Параметры
+###
+GET http://127.0.0.1:8000/api/v1/parameter/
+Content-Type: application/json
+
+#Параметры продуктов
+###
+GET http://127.0.0.1:8000/api/v1/product_parameter/
+Content-Type: application/json
+
+#Пользователи
+###
+POST http://127.0.0.1:8000/api/v1/register/
+Content-Type: application/json
+
+{
+  "email": "user_1@local.com",
+  "password": "12345",
+  "first_name": "user_1",
+  "last_name": "last_user_1",
+  "company": "comp_1",
+  "position": "engener"
+}
+
+###
+POST http://127.0.0.1:8000/api/v1/register/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+{
+  "email": "user_6@local.com",
+  "password": "12345",
+  "first_name": "user_1",
+  "last_name": "last_user_1",
+  "company": "comp_1",
+  "position": "engener"
+}
+
+###
+POST http://127.0.0.1:8000/api/v1/api-token-auth/
+Content-Type: application/json
+
+{
+  "username": "admin@local.com",
+  "password": "12345"
+}
+
+###Контакты
+###
+POST http://127.0.0.1:8000/api/v1/contacts/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+{
+  "city": "Санкт-Петербург",
+  "street": "Пушкина",
+  "house": "2",
+  "structure": "1",
+  "building": "17",
+  "apartment": "32",
+  "phone": "+79213456765"
+}
+
+###
+GET http://127.0.0.1:8000/api/v1/contacts/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+###
+PUT http://127.0.0.1:8000/api/v1/contacts/1/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+{
+  "city": "Москва",
+  "street": "Лермонтова",
+  "house": "3",
+  "structure": "1",
+  "building": "17",
+  "apartment": "32",
+  "phone": "+79213456765"
+}
+
+###Обновление прайса
+###
+POST http://127.0.0.1:8000/api/v1/update_price/
+Content-Type: application/json
+
+{
+  "url": "https://wdfiles.ru/0e44aa"
+}
