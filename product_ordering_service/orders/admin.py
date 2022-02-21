@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
-from .models import Shop, Category, Product, ProductInfo, Parameter, ProductParameter, CustomUser, Contact
+from .models import Shop, Category, Product, ProductInfo, Parameter, ProductParameter, CustomUser, Contact, OrderItem, Order
 
 
 @admin.register(CustomUser)
@@ -65,4 +65,14 @@ class ParameterAdmin(admin.ModelAdmin):
 
 @admin.register(ProductParameter)
 class ProductParameterAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
     pass

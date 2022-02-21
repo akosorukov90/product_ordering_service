@@ -30,15 +30,15 @@ Content-Type: application/json
 GET http://127.0.0.1:8000/api/v1/product_info/
 Content-Type: application/json
 
-#Параметры
-###
-GET http://127.0.0.1:8000/api/v1/parameter/
-Content-Type: application/json
+# #Параметры
+# ###
+# GET http://127.0.0.1:8000/api/v1/parameter/
+# Content-Type: application/json
 
-#Параметры продуктов
-###
-GET http://127.0.0.1:8000/api/v1/product_parameter/
-Content-Type: application/json
+# #Параметры продуктов
+# ###
+# GET http://127.0.0.1:8000/api/v1/product_parameter/
+# Content-Type: application/json
 
 #Пользователи
 ###
@@ -81,7 +81,7 @@ Content-Type: application/json
 ###
 POST http://127.0.0.1:8000/api/v1/contacts/
 Content-Type: application/json
-Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+Authorization: Token 411f3254711e6317de445151353abe3cd3cf2c0d
 
 {
   "city": "Санкт-Петербург",
@@ -117,7 +117,28 @@ Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
 ###
 POST http://127.0.0.1:8000/api/v1/update_price/
 Content-Type: application/json
+Authorization: Token 411f3254711e6317de445151353abe3cd3cf2c0d
+
+###
+GET http://127.0.0.1:8000/api/v1/update_price/1/
+Content-Type: application/json
+Authorization: Token 9be11e2905c25edb2976251d73d10165fd8a1ae8
+
+
+###Заказы
+GET http://127.0.0.1:8000/api/v1/order/
+Content-Type: application/json
+Authorization: Token 411f3254711e6317de445151353abe3cd3cf2c0d
+
+###
+POST http://127.0.0.1:8000/api/v1/order/
+Content-Type: application/json
+Authorization: Token 411f3254711e6317de445151353abe3cd3cf2c0d
 
 {
-  "url": "https://wdfiles.ru/0e44aa"
+  "items": [
+    {
+      "product_info": "1"
+    }
+  ]
 }

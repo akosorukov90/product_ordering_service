@@ -3,3 +3,7 @@ djangorestframework
 psycopg2-binary
 requests
 pyyaml
+pytest
+pytest-django
+pytest-cov
+model_bakery

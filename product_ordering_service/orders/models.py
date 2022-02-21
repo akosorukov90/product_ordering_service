@@ -196,12 +196,15 @@ class ProductParameter(models.Model):
 
 
 class Order(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(CustomUser, verbose_name='Пользователь',
                              related_name='orders', blank=True,
                              on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
     status = models.CharField(verbose_name='Статус', choices=STATUS_CHOICES, max_length=15)
+    contact = models.ForeignKey(Contact, verbose_name='Контакт',
+                                blank=True, null=True,
+                                on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Заказ'
@@ -209,20 +212,20 @@ class Order(models.Model):
         ordering = ('-dt',)
 
     def __str__(self):
-        return f'{self.id} {str(self.dt)}'
+        return f'{self.id} {self.status}'
 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, verbose_name='Заказ', related_name='ordered_items', blank=True,
                               on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, verbose_name='Продукт', related_name='ordered_items',
-                                blank=True,
-                                on_delete=models.CASCADE)
+    product_info = models.ForeignKey(ProductInfo, verbose_name='Информация о продукте', related_name='ordered_items',
+                                     blank=True,
+                                     on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='Количество')
 
     class Meta:
         verbose_name = 'Заказанная позиция'
         verbose_name_plural = "Список заказанных позиций"
         constraints = [
-            models.UniqueConstraint(fields=['order_id', 'product'], name='unique_order_item'),
+            models.UniqueConstraint(fields=['order_id', 'product_info'], name='unique_order_item'),
         ]

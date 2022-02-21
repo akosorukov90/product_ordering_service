@@ -4,8 +4,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+from django.http import JsonResponse
 
-from .models import Shop, Category, Product, ProductInfo, ProductParameter, CustomUser, Contact
+from .models import Shop, Category, Product, ProductInfo, ProductParameter, CustomUser, Contact, Order, OrderItem
 
 
 # Формирование токена при регистрации пользователя
@@ -97,3 +98,38 @@ class ProductInfoSerializer(serializers.ModelSerializer):
         model = ProductInfo
         fields = ('id', 'product', 'shop', 'quantity', 'price', 'price_rrc', 'product_parameter')
         read_only_fields = ('id',)
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    # product_info = ProductInfoSerializer(read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = ('order', 'product_info', 'quantity')
+        read_only_fields = ('id',)
+        extra_kwargs = {
+            'order': {'write_only': True}
+        }
+
+
+class OrderItemCreateSerializer(OrderItemSerializer):
+    product_info = ProductInfoSerializer(read_only=True)
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    ordered_items = OrderItemCreateSerializer(read_only=True, many=True)
+    contact = ContactSerializer(read_only=True)
+    total_sum = serializers.IntegerField()
+
+    class Meta:
+        model = Order
+        fields = ('id', 'ordered_items', 'contact', 'dt', 'total_sum', 'status')
+        read_only_fields = ('id',)
+
+    # def create(self, validated_data):
+    #     print(validated_data.get("ordered_items"))
+    #     # ordered_items = validated_data.pop("ordered_items")
+    #     order = super().create(validated_data)
+    #     # for p in ordered_items:
+    #     #     OrderItem.objects.create(order=order, **p)
+    #     return order
